@@ -1,0 +1,11 @@
+{
+  "name": "ssss",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "npx plug-compile ssss.plug.yaml"
+  },
+  "dependencies": {
+    "@silverbulletmd/silverbullet": ">=2.12.0"
+  }
+}
