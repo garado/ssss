@@ -32,6 +32,7 @@ Replaces the raw frontmatter YAML with a styled table.
 
 .sb-fm-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-bottom: 0.7rem;
   background-color: none;
@@ -45,19 +46,64 @@ Replaces the raw frontmatter YAML with a styled table.
   font-weight: 600;
   font-size: 0.875em;
   white-space: nowrap;
-  width: 1%;
+  width: 7em;
   background-color: none;
 }
 
 .sb-fm-value {
   padding: 5px 14px 5px 10px;
   font-size: 0.875em;
+  overflow-wrap: anywhere;
+}
+
+.sb-fm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3em;
 }
 
 .sb-fm-link {
   color: var(--link-color);
   text-decoration: underline;
   cursor: pointer;
+}
+
+.sb-fm-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  border: 1px solid var(--ui-accent-color);
+  background-color: color-mix(in srgb, var(--ui-accent-color) 18%, transparent);
+  border-radius: 4px;
+  padding: 0.05em 0.5em;
+}
+
+.sb-fm-tag .sb-fm-link {
+  text-decoration: none;
+}
+
+.sb-fm-tag-remove {
+  color: var(--meta-subtle-color);
+  cursor: pointer;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.sb-fm-tag-remove:hover {
+  color: var(--link-color);
+}
+
+.sb-fm-tag-add {
+  color: var(--meta-subtle-color);
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.9em;
+  padding-left: 0.5em;
+}
+
+.sb-fm-tag-add:hover {
+  color: var(--link-color);
 }
 
 /* Hide raw frontmatter YAML in the editor */
@@ -116,15 +162,55 @@ local function buildValueCell(key, value)
   if key == "tags" then
     local tags = normalizeTags(value)
 
-    for i, tag in ipairs(tags) do
-      if i > 1 then td.appendChild(dom.span { " " }) end
+    local function saveTags(newTags)
+      local patched = index.patchFrontmatter(editor.getText(), {
+        { op = "set-key", path = "tags", value = newTags },
+      })
+      editor.setText(patched)
+      editor.rebuildEditorState()
+    end
+
+    local tagsWrap = dom.div { class = "sb-fm-tags" }
+
+    for _, tag in ipairs(tags) do
       local t = tag
-      td.appendChild(dom.a {
+      local chip = dom.span { class = "sb-fm-tag" }
+      chip.appendChild(dom.a {
         class = "sb-fm-link",
         onclick = function() editor.navigate("Tags/" .. t) end,
         t
       })
+      chip.appendChild(dom.a {
+        class = "sb-fm-tag-remove",
+        title = "Remove tag",
+        onclick = function()
+          local newTags = {}
+          for _, other in ipairs(tags) do
+            if other ~= t then table.insert(newTags, other) end
+          end
+          saveTags(newTags)
+        end,
+        "×"
+      })
+      tagsWrap.appendChild(chip)
     end
+
+    tagsWrap.appendChild(dom.a {
+      class = "sb-fm-tag-add",
+      onclick = function()
+        local newTag = editor.prompt("Add tag")
+        if not newTag or newTag == "" then return end
+        newTag = newTag:gsub("^#", "")
+        if table.includes(tags, newTag) then return end
+        local newTags = {}
+        for _, existing in ipairs(tags) do table.insert(newTags, existing) end
+        table.insert(newTags, newTag)
+        saveTags(newTags)
+      end,
+      "add tag"
+    })
+
+    td.appendChild(tagsWrap)
 
   elseif key == "status" then
     local status = tostring(value)
@@ -200,12 +286,8 @@ view.define {
       end
     end
 
-    -- Check there is at least one displayable key
-    local hasKeys = false
-    for k in pairs(fm) do
-      if not FM_SKIP[k] then hasKeys = true; break end
-    end
-    if not hasKeys then return end
+    -- Always show a tags row, even when empty, so there's always an "add tag" control.
+    if fm["tags"] == nil then fm["tags"] = {} end
 
     -- Build ordered key list
     local seen = {}
