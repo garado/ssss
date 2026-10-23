@@ -134,12 +134,24 @@ local function buildValueCell(key, value)
       status
     })
 
+  elseif type(value) == "boolean" then
+    local newValue = not value
+    td.appendChild(dom.a {
+      class = "sb-fm-link",
+      onclick = function()
+        local patched = index.patchFrontmatter(editor.getText(), {
+          { op = "set-key", path = key, value = newValue },
+        })
+        editor.setText(patched)
+        editor.rebuildEditorState()
+      end,
+      value and "true" or "false"
+    })
+
   else
     local display
     if type(value) == "table" then
       display = table.concat(value, ", ")
-    elseif type(value) == "boolean" then
-      display = value and "true" or "false"
     else
       display = tostring(value)
     end
