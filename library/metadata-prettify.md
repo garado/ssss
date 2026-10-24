@@ -69,6 +69,34 @@ Replaces the raw frontmatter YAML with a styled table.
   cursor: pointer;
 }
 
+.sb-fm-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em;
+}
+
+.sb-fm-status-option {
+  border: 1px solid var(--top-border-color);
+  border-radius: 4px;
+  padding: 0.05em 0.6em;
+  color: var(--subtle-color);
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.875em;
+}
+
+.sb-fm-status-option:hover {
+  border-color: var(--ui-accent-color);
+  color: var(--root-color);
+}
+
+.sb-fm-status-active {
+  border: 1px solid var(--ui-accent-color);
+  background-color: color-mix(in srgb, var(--ui-accent-color) 18%, transparent);
+  color: var(--root-color);
+  font-weight: 600;
+}
+
 .sb-fm-tag {
   display: inline-flex;
   align-items: center;
@@ -129,6 +157,8 @@ end
 
 local FM_SKIP = { name = true, pageDecoration = true, range = true }
 
+local STATUS_VALUES = { "stub", "start", "solid" }
+
 -- Preferred display order for known keys; others follow sorted alphabetically.
 local FM_ORDER = { "created", "modified", "tags", "status" }
 
@@ -162,12 +192,20 @@ local function buildValueCell(key, value)
   if key == "tags" then
     local tags = normalizeTags(value)
 
+    local function currentTags()
+      local extracted = index.extractFrontmatter(editor.getText())
+      local fm = extracted and extracted.frontmatter or {}
+      return normalizeTags(fm.tags)
+    end
+
     local function saveTags(newTags)
-      local patched = index.patchFrontmatter(editor.getText(), {
-        { op = "set-key", path = "tags", value = newTags },
-      })
+      local ops = { { op = "delete-key", path = "tags" } }
+      if #newTags > 0 then
+        table.insert(ops, { op = "set-key", path = "tags", value = newTags })
+      end
+      local patched = index.patchFrontmatter(editor.getText(), ops)
       editor.setText(patched)
-      editor.rebuildEditorState()
+      codeWidget.refreshAll()
     end
 
     local tagsWrap = dom.div { class = "sb-fm-tags" }
@@ -185,7 +223,7 @@ local function buildValueCell(key, value)
         title = "Remove tag",
         onclick = function()
           local newTags = {}
-          for _, other in ipairs(tags) do
+          for _, other in ipairs(currentTags()) do
             if other ~= t then table.insert(newTags, other) end
           end
           saveTags(newTags)
@@ -201,9 +239,8 @@ local function buildValueCell(key, value)
         local newTag = editor.prompt("Add tag")
         if not newTag or newTag == "" then return end
         newTag = newTag:gsub("^#", "")
-        if table.includes(tags, newTag) then return end
-        local newTags = {}
-        for _, existing in ipairs(tags) do table.insert(newTags, existing) end
+        local newTags = currentTags()
+        if table.includes(newTags, newTag) then return end
         table.insert(newTags, newTag)
         saveTags(newTags)
       end,
@@ -214,11 +251,27 @@ local function buildValueCell(key, value)
 
   elseif key == "status" then
     local status = tostring(value)
-    td.appendChild(dom.a {
-      class = "sb-fm-link",
-      onclick = function() editor.navigate("tag:" .. status) end,
-      status
-    })
+    local statusWrap = dom.div { class = "sb-fm-status" }
+
+    for _, s in ipairs(STATUS_VALUES) do
+      local sVal = s
+      local classes = "sb-fm-status-option"
+      if sVal == status then classes = classes .. " sb-fm-status-active" end
+      statusWrap.appendChild(dom.a {
+        class = classes,
+        onclick = function()
+          if sVal == status then return end
+          local patched = index.patchFrontmatter(editor.getText(), {
+            { op = "set-key", path = "status", value = sVal },
+          })
+          editor.setText(patched)
+          codeWidget.refreshAll()
+        end,
+        sVal
+      })
+    end
+
+    td.appendChild(statusWrap)
 
   elseif type(value) == "boolean" then
     local newValue = not value
@@ -229,7 +282,7 @@ local function buildValueCell(key, value)
           { op = "set-key", path = key, value = newValue },
         })
         editor.setText(patched)
-        editor.rebuildEditorState()
+        codeWidget.refreshAll()
       end,
       value and "true" or "false"
     })
@@ -286,8 +339,11 @@ view.define {
       end
     end
 
-    -- Always show a tags row, even when empty, so there's always an "add tag" control.
+    -- keeps "add tag" always visible, even if none set in fm
     if fm["tags"] == nil then fm["tags"] = {} end
+
+    -- keeps status picker always visible, even if no status is set in fm
+    if fm["status"] == nil then fm["status"] = "stub" end
 
     -- Build ordered key list
     local seen = {}
