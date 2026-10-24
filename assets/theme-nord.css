@@ -15,6 +15,10 @@ html {
   --editor-code-typename-color: #5E81AC !important;
   --editor-frontmatter-marker-color: #BF616A80 !important;
   --editor-selection-background-color: #D8DEE9 !important;
+  --red-color: #BF616A !important;
+  --yellow-color: #EBCB8B !important;
+  --green-color: #A3BE8C !important;
+  --blue-color: #5E81AC !important;
 }
 
 html[data-theme=dark] {
@@ -35,4 +39,8 @@ html[data-theme=dark] {
   --editor-frontmatter-marker-color: #BF616A80 !important;
   --editor-selection-background-color: #434C5E !important;
   --editor-wiki-link-page-background-color: none !important;
+  --red-color: #BF616A !important;
+  --yellow-color: #EBCB8B !important;
+  --green-color: #A3BE8C !important;
+  --blue-color: #88C0D0 !important;
 }

@@ -15,6 +15,10 @@ html {
   --editor-code-typename-color: #356b94 !important;
   --editor-frontmatter-marker-color: #89000080 !important;
   --editor-selection-background-color: #dae5e2 !important;
+  --red-color: #ad514c !important;
+  --yellow-color: #b8860b !important;
+  --green-color: #5f7a52 !important;
+  --blue-color: #356b94 !important;
 }
 
 html[data-theme=dark] {
@@ -35,4 +39,8 @@ html[data-theme=dark] {
   --editor-frontmatter-marker-color: #89000080 !important;
   --editor-selection-background-color: #314A52 !important;
   --editor-wiki-link-page-background-color: none !important;
+  --red-color: #C76363 !important;
+  --yellow-color: #d4b05a !important;
+  --green-color: #7fa374 !important;
+  --blue-color: #6fa0c2 !important;
 }

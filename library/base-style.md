@@ -55,16 +55,53 @@ input, .sb-checkbox {
 }
 
 /* Admonitions ----------------------------- */
+
+.sb-admonition[admonition="note" i] { --admonition-accent: var(--blue-color); }
+.sb-admonition[admonition="warning" i] { --admonition-accent: var(--yellow-color); }
+.sb-admonition[admonition="danger" i] { --admonition-accent: var(--red-color); }
+.sb-admonition[admonition="success" i] { --admonition-accent: var(--green-color); }
+
 .sb-admonition {
-  padding-top: 1ch !important;
-  padding-bottom: 1ch !important;
-  margin-left: -1ch !important;
+  --admonition-accent: var(--ui-accent-color);
+  color: var(--root-color);
+  border: none !important;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0.2em 1ch !important;
+  background-color: color-mix(in srgb, var(--admonition-accent) 15%, transparent) !important;
+  box-shadow:
+    inset 1px 0 0 var(--admonition-accent),
+    inset -1px 0 0 var(--admonition-accent) !important;
 }
 
-.sb-admonition.sb-line-li { /* lists inside admonition */
-  line-height: 1ch !important;
-  padding-top: 0.5ch !important;
-  padding-bottom: 0.5ch !important;
+.sb-admonition-title {
+  font-weight: bold;
+}
+
+.sb-admonition:not(.sb-admonition + .sb-admonition) {
+  box-shadow:
+    inset 1px 0 0 var(--admonition-accent),
+    inset -1px 0 0 var(--admonition-accent),
+    inset 0 1px 0 var(--admonition-accent) !important;
+}
+
+.sb-admonition:not(:has(+ .sb-admonition)) {
+  box-shadow:
+    inset 1px 0 0 var(--admonition-accent),
+    inset -1px 0 0 var(--admonition-accent),
+    inset 0 -1px 0 var(--admonition-accent) !important;
+}
+
+.sb-admonition:not(.sb-admonition + .sb-admonition):not(:has(+ .sb-admonition)) {
+  box-shadow:
+    inset 1px 0 0 var(--admonition-accent),
+    inset -1px 0 0 var(--admonition-accent),
+    inset 0 1px 0 var(--admonition-accent),
+    inset 0 -1px 0 var(--admonition-accent) !important;
+}
+
+.sb-admonition-type {
+  font-weight: 700 !important;
 }
 
 /* Links ----------------------------------- */
