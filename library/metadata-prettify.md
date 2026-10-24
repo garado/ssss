@@ -157,7 +157,7 @@ end
 
 local FM_SKIP = { name = true, pageDecoration = true, range = true }
 
-local STATUS_VALUES = { "stub", "start", "solid" }
+local STATUS_VALUES = { "none", "stub", "start", "solid" }
 
 -- Preferred display order for known keys; others follow sorted alphabetically.
 local FM_ORDER = { "created", "modified", "tags", "status" }
@@ -261,9 +261,11 @@ local function buildValueCell(key, value)
         class = classes,
         onclick = function()
           if sVal == status then return end
-          local patched = index.patchFrontmatter(editor.getText(), {
-            { op = "set-key", path = "status", value = sVal },
-          })
+          local ops = { { op = "delete-key", path = "status" } }
+          if sVal ~= "none" then
+            table.insert(ops, { op = "set-key", path = "status", value = sVal })
+          end
+          local patched = index.patchFrontmatter(editor.getText(), ops)
           editor.setText(patched)
           codeWidget.refreshAll()
         end,
@@ -343,7 +345,7 @@ view.define {
     if fm["tags"] == nil then fm["tags"] = {} end
 
     -- keeps status picker always visible, even if no status is set in fm
-    if fm["status"] == nil then fm["status"] = "stub" end
+    if fm["status"] == nil then fm["status"] = "none" end
 
     -- Build ordered key list
     local seen = {}
