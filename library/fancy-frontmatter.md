@@ -35,25 +35,28 @@ Replaces the raw frontmatter YAML with a styled table.
   table-layout: fixed;
   border-collapse: collapse;
   margin-bottom: 0.7rem;
-  background-color: none;
-  border: 1px solid var(--root-color);
+  background-color: var(--subtle-background-color);
+  border: 1px dashed var(--subtle-color) !important;
 }
 
 .sb-fm-key {
   text-align: right;
-  padding: 5px 14px 5px 10px;
+  padding: 0.5rem 1rem !important;
   color: var(--root-color);
   font-weight: 600;
   font-size: 0.875em;
   white-space: nowrap;
   width: 7em;
-  background-color: none;
+  background-color: var(--subtle-background-color) !important;
+  border-bottom: 1px dashed var(--subtle-color) !important;
 }
 
 .sb-fm-value {
   padding: 5px 14px 5px 10px;
   font-size: 0.875em;
   overflow-wrap: anywhere;
+  background-color: var(--subtle-background-color) !important;
+  border-bottom: 1px dashed var(--subtle-color) !important;
 }
 
 .sb-fm-tags {
