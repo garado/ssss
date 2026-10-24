@@ -16,3 +16,8 @@ functions:
     path: ./src/main.ts:applyStoredTheme
     events:
       - editor:init
+
+  toggleDarkMode:
+    path: ./src/main.ts:toggleDarkMode
+    command:
+      name: "SSSS: Toggle Dark Mode"

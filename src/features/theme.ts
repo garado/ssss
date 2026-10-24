@@ -84,3 +84,8 @@ export async function applyStoredTheme() {
   const current = await getCurrentTheme();
   await applyToSpace(current);
 }
+
+export async function toggleDarkMode() {
+  const current = await editor.getUiOption("darkMode");
+  await editor.setUiOption("darkMode", !current);
+}

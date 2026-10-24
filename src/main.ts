@@ -19,3 +19,8 @@ export async function applyStoredTheme() {
   if (!(await isFeatureEnabled("theme"))) return;
   await theme.applyStoredTheme();
 }
+
+export async function toggleDarkMode() {
+  if (!(await isFeatureEnabled("theme"))) return;
+  await theme.toggleDarkMode();
+}
