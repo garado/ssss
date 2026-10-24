@@ -1,9 +1,12 @@
 
 # ssss 🐍 - super special silverbullet setup
 
-Plugin for my personal Silverbullet configuration, adding styles and a collection of little features and improvements
+A collection of plugins/libraries for my personal Silverbullet configuration
 
-## Note format
+## theme switcher
 
-## Styles
+Opinionated theming and a few nice colorschemes.
 
+## fancy-frontmatter
+
+Nice rendering for frontmatter
