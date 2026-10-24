@@ -1,5 +1,5 @@
 ---
-name: Library/garado/metadata-prettify/PLUG
+name: Library/garado/fancy-frontmatter/PLUG
 tags: meta/library
 ---
 
