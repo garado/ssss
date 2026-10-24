@@ -11,7 +11,7 @@ import { getSsssConfig } from "../config.ts";
 const STORE_KEY = "ssss.theme";
 const DEFAULT_THEME = "default";
 const THEME_PAGE = "Library/garado/ssss/_theme";
-const BUILTIN_THEME_NAMES = ["default", "nord"];
+const BUILTIN_THEME_NAMES = ["default", "nord", "nostalgia", "everforest", "gruvbox"];
 
 async function getThemeNames(): Promise<string[]> {
   const cfg = await getSsssConfig();

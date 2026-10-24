@@ -8,7 +8,7 @@ import { system } from "@silverbulletmd/silverbullet/syscalls";
  * config.set {
  *   ssss = {
  *     features = { theme = true },
- *     theme = { themes = { "default", "nord" } },
+ *     theme = { themes = { "default", "nord", "nostalgia", "everforest", "gruvbox" } },
  *   },
  * }
  * ```

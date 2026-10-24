@@ -1,6 +1,6 @@
 name: ssss
 assets:
-  - assets/*
+  - assets/*.css
 functions:
   cycleTheme:
     path: ./src/main.ts:cycleTheme

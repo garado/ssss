@@ -1,0 +1,46 @@
+html {
+  --root-background-color: #FBF1C7 !important;
+  --root-color: #3C3836 !important;
+  --subtle-background-color: #EBDBB2 !important;
+  --subtle-color: #7C6F64 !important;
+  --highlight-color: #D5C4A1 !important;
+  --ui-accent-color: #427B58 !important;
+  --link-color: #076678 !important;
+  --meta-subtle-color: #928374 !important;
+  --modal-background-color: #F2E5BC !important;
+  --top-border-color: #3C383622 !important;
+  --top-loading-color: #427B58 !important;
+  --top-sync-error-background-color: #9D000633 !important;
+  --editor-code-number-color: #076678 !important;
+  --editor-code-typename-color: #076678 !important;
+  --editor-frontmatter-marker-color: #9D000680 !important;
+  --editor-selection-background-color: #D5C4A1 !important;
+  --red-color: #9D0006 !important;
+  --yellow-color: #B57614 !important;
+  --green-color: #79740E !important;
+  --blue-color: #076678 !important;
+}
+
+html[data-theme=dark] {
+  --root-background-color: #282828 !important;
+  --root-color: #EBDBB2 !important;
+  --subtle-background-color: #3C3836 !important;
+  --subtle-color: #A89984 !important;
+  --highlight-color: #504945 !important;
+  --ui-accent-color: #8EC07C !important;
+  --link-color: #83A598 !important;
+  --meta-subtle-color: #928374 !important;
+  --modal-background-color: #3C3836 !important;
+  --top-border-color: #EBDBB222 !important;
+  --top-loading-color: #8EC07C !important;
+  --top-sync-error-background-color: #CC241D66 !important;
+  --editor-code-number-color: #83A598 !important;
+  --editor-code-typename-color: #83A598 !important;
+  --editor-frontmatter-marker-color: #FB493480 !important;
+  --editor-selection-background-color: #504945 !important;
+  --editor-wiki-link-page-background-color: none !important;
+  --red-color: #FB4934 !important;
+  --yellow-color: #FABD2F !important;
+  --green-color: #B8BB26 !important;
+  --blue-color: #83A598 !important;
+}

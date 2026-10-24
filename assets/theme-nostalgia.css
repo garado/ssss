@@ -1,0 +1,46 @@
+html {
+  --root-background-color: #D9D5BA !important;
+  --root-color: #444444 !important;
+  --subtle-background-color: #44444411 !important;
+  --subtle-color: #75705A !important;
+  --highlight-color: #82755B44 !important;
+  --ui-accent-color: #5B6982 !important;
+  --link-color: #5B6982 !important;
+  --meta-subtle-color: #44444488 !important;
+  --modal-background-color: #E2DFC8 !important;
+  --top-border-color: #44444422 !important;
+  --top-loading-color: #5B6982 !important;
+  --top-sync-error-background-color: #825B6999 !important;
+  --editor-code-number-color: #5B6982 !important;
+  --editor-code-typename-color: #5B6982 !important;
+  --editor-frontmatter-marker-color: #825B6980 !important;
+  --editor-selection-background-color: #C9C4A6 !important;
+  --red-color: #825B69 !important;
+  --yellow-color: #82755B !important;
+  --green-color: #69825B !important;
+  --blue-color: #5B6982 !important;
+}
+
+html[data-theme=dark] {
+  --root-background-color: #211F14 !important;
+  --root-color: #D9D5BA !important;
+  --subtle-background-color: #2E2B1E !important;
+  --subtle-color: #7D7762 !important;
+  --highlight-color: #3B382A !important;
+  --ui-accent-color: #A0BDB3 !important;
+  --link-color: #7484A2 !important;
+  --meta-subtle-color: #8A847088 !important;
+  --modal-background-color: #2E2B1E !important;
+  --top-border-color: #D9D5BA22 !important;
+  --top-loading-color: #A0BDB3 !important;
+  --top-sync-error-background-color: #BDA0AA66 !important;
+  --editor-code-number-color: #A0BDB3 !important;
+  --editor-code-typename-color: #A0BDB3 !important;
+  --editor-frontmatter-marker-color: #BDA0AA80 !important;
+  --editor-selection-background-color: #3B382A !important;
+  --editor-wiki-link-page-background-color: none !important;
+  --red-color: #BDA0AA !important;
+  --yellow-color: #BDB3A0 !important;
+  --green-color: #AABDA0 !important;
+  --blue-color: #7484A2 !important;
+}

@@ -67,7 +67,7 @@ input, .sb-checkbox {
   border: none !important;
   border-radius: 0 !important;
   margin: 0 !important;
-  padding: 0.2em 1ch !important;
+  padding: 0.2em 2ch !important;
   background-color: color-mix(in srgb, var(--admonition-accent) 15%, transparent) !important;
   box-shadow:
     inset 1px 0 0 var(--admonition-accent),
