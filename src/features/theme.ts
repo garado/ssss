@@ -5,7 +5,7 @@ import { getSsssConfig } from "../config.ts";
  * Theme switching!
  *
  * - Active theme's CSS is written in a hidden page in a `space-style`
- * - Theme colors are bundled as assets in `assets/theme-<name>.css`
+ * - Theme colors are bundled as assets in `assets/themes/theme-<name>.css`
  */
 
 const STORE_KEY = "ssss.theme";
@@ -32,8 +32,8 @@ async function getCurrentTheme(): Promise<string> {
 
 async function applyToSpace(theme: string) {
   const [themeCss, sharedCss] = await Promise.all([
-    asset.readAsset("ssss", `assets/theme-${theme}.css`, "utf8"),
-    asset.readAsset("ssss", "assets/theme-shared.css", "utf8"),
+    asset.readAsset("ssss", `assets/themes/theme-${theme}.css`, "utf8"),
+    asset.readAsset("ssss", "assets/themes/theme-shared.css", "utf8"),
   ]);
   const page = [
     "---",
