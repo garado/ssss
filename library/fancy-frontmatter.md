@@ -154,8 +154,8 @@ Replaces the raw frontmatter YAML with a styled table.
 local function enabled()
   local cfg = config.get("ssss", {})
   local features = cfg.features
-  if type(features) ~= "table" then return true end
-  return features.metadataPrettify ~= false
+  if type(features) ~= "table" then return false end
+  return features.metadataPrettify == true
 end
 
 local FM_SKIP = { name = true, pageDecoration = true, range = true }

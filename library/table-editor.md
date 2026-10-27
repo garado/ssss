@@ -21,7 +21,7 @@ real page, because they drive `window.client.editorView`. That object is the
 live CodeMirror editor, and the scripts send edits to it directly. Space-lua
 is the only part of SilverBullet that can reach the page, so it loads them.
 
-Set `ssss.features.tableEditor` to false to turn the feature off. The flag
+Set `ssss.features.tableEditor` to true to turn the feature on. The flag
 covers the styles as well as the scripts. The styles therefore load from a
 file, not from a `space-style` block. A `space-style` block always applies,
 and no flag can stop it.
@@ -90,7 +90,7 @@ local function loadStyle(id, file)
 end
 
 local features = config.get("ssss", {}).features
-if type(features) ~= "table" or features.tableEditor ~= false then
+if type(features) == "table" and features.tableEditor == true then
   loadStyle("sb-table-style", "table-editor.css")
   loadScript("sb-table-resize", "table-resize.js")
   loadScript("sb-table-edit", "table-editor.js")

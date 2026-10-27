@@ -17,11 +17,11 @@ export async function getSsssConfig(): Promise<Record<string, unknown>> {
   return await system.getConfig("ssss", {}) as Record<string, unknown>;
 }
 
-/** features are enabled by default unless explicitly set to `false` in `ssss.features.<name>` */
+/** features are off unless explicitly set to `true` in `ssss.features.<name>` */
 export async function isFeatureEnabled(name: string): Promise<boolean> {
   const cfg = await getSsssConfig();
   const features = cfg.features;
-  if (!features || typeof features !== "object") return true;
+  if (!features || typeof features !== "object") return false;
   const flag = (features as Record<string, unknown>)[name];
-  return flag !== false;
+  return flag === true;
 }

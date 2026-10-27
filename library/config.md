@@ -12,10 +12,10 @@ config.defineCategory {
   priority = 10,
 }
 
-local function feature(key, label, description)
+local function feature(key, label, description, default)
   config.define("ssss.features." .. key, {
     type = "boolean",
-    default = true,
+    default = default or false,
     description = description,
     ui = { category = "ssss", label = label },
   })
@@ -24,5 +24,5 @@ end
 feature("theme", "Theme switcher", "Opinionated theming and theme switching commands")
 feature("tableEditor", "Table editor", "Improved editing, resizing, and reordering for markdown tables")
 feature("metadataPrettify", "Fancy frontmatter", "Opinionated frontmatter rendering")
-feature("vimClipboard", "Vim clipboard yank", "Yank to system clipboard in Vim mode")
+feature("vimClipboard", "Vim clipboard yank", "Yank to system clipboard in Vim mode", true)
 ```
