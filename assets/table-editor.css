@@ -1,0 +1,151 @@
+.sb-table-widget {
+  overflow-x: visible !important;
+}
+.sb-table-widget table {
+  width: 100% !important;
+  table-layout: auto;
+}
+.sb-table-widget td,
+.sb-table-widget th {
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.sb-table-widget td,
+.sb-table-widget th {
+  box-sizing: border-box;
+}
+body.sb-col-resize-hover .sb-table-widget,
+body.sb-col-resize-hover .sb-table-widget *,
+body.sb-col-resizing,
+body.sb-col-resizing * {
+  cursor: col-resize !important;
+}
+body.sb-col-resizing {
+  user-select: none;
+}
+
+.sb-table-widget td,
+.sb-table-widget th {
+  cursor: text;
+}
+.sb-table-widget td a,
+.sb-table-widget th a {
+  cursor: pointer;
+}
+.sb-table-widget .sb-cell-editing {
+  background: color-mix(in srgb, var(--ui-accent-color) 14%, var(--root-background-color)) !important;
+  border: 1px solid var(--ui-accent-color) !important;
+}
+
+.sb-table-widget .sb-cell-editing:has(.sb-cell-insert) {
+  background: color-mix(in srgb, var(--ui-accent-color) 26%, var(--root-background-color)) !important;
+}
+
+.sb-cell-editor {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+}
+.sb-table-handle {
+  position: fixed;
+  z-index: 50;
+  display: none !important;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--subtle-color);
+  background: var(--modal-background-color);
+  border: 1px solid var(--top-border-color);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.sb-table-handle.is-visible {
+  display: flex !important;
+}
+.sb-table-handle:hover {
+  color: var(--root-color);
+}
+.sb-table-handle svg {
+  width: 14px;
+  height: 14px;
+}
+.sb-table-handle.is-grip {
+  cursor: grab;
+  touch-action: none;
+}
+.sb-table-handle.is-col svg {
+  transform: rotate(90deg);
+}
+body.sb-table-dragging,
+body.sb-table-dragging * {
+  cursor: grabbing !important;
+  user-select: none;
+}
+.sb-table-widget .sb-table-dragged {
+  opacity: 0.4;
+}
+.sb-table-drop {
+  position: fixed;
+  z-index: 55;
+  pointer-events: none;
+  background: var(--ui-accent-color);
+}
+.sb-table-menu {
+  position: fixed;
+  z-index: 60;
+  min-width: 190px;
+  padding: 4px 0;
+  font-family: var(--editor-font), sans-serif;
+  font-size: 0.875em;
+  color: var(--root-color);
+  background: var(--modal-background-color);
+  border: 1px solid var(--top-border-color);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 12px;
+}
+.sb-table-menu .sb-table-menu-head {
+  padding: 6px 12px 2px;
+  font-size: 0.75em;
+  color: var(--subtle-color);
+}
+.sb-table-menu button {
+  display: block;
+  width: 100%;
+  padding: 4px 12px;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.sb-table-menu button:hover,
+.sb-table-menu button:focus-visible {
+  background: color-mix(in srgb, var(--ui-accent-color) 14%, transparent);
+  outline: none;
+}
+.sb-table-menu button.is-current::after {
+  content: " ✓";
+}
+.sb-table-menu button.is-danger {
+  color: var(--red-color, var(--root-color));
+}
+.sb-table-menu hr {
+  margin: 4px 0;
+  border: 0;
+  border-top: 1px solid var(--top-border-color);
+}

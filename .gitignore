@@ -1,3 +1,5 @@
 node_modules/
 ssss.plug.js
 ssss.plug.js.map
+assets/table-editor.js
+assets/table-resize.js

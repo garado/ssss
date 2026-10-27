@@ -1,6 +1,5 @@
 name: ssss
 assets:
-  - assets/*.css
   - assets/themes/*.css
 functions:
   cycleTheme:

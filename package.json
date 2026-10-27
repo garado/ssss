@@ -3,9 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "npx plug-compile ssss.plug.yaml"
+    "build": "npm run build:plug && npm run build:browser",
+    "build:plug": "npx plug-compile ssss.plug.yaml",
+    "build:browser": "esbuild src/features/table-editor.ts src/features/table-resize.ts --bundle --format=iife --target=es2020 --outdir=assets",
+    "typecheck": "tsc --noEmit --lib es2020,dom --target es2020 src/features/sb-client.d.ts src/features/table-editor.ts src/features/table-resize.ts"
   },
   "dependencies": {
     "@silverbulletmd/silverbullet": ">=2.12.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "js-yaml": "^4.1.0",
+    "sass": "^1.80.0",
+    "typescript": "^5.6.0"
   }
 }
