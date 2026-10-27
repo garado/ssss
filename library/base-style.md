@@ -149,6 +149,11 @@ thead tr {
 
 /* Unsorted -------------------------------- */
 
+#cfg-root {
+  border: 1px solid var(--root-color) !important;
+  border-radius: 0px !important;
+}
+
 .sb-modal-box {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 12px;
   padding: 4px !important;
