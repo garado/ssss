@@ -1,5 +1,5 @@
 import { asset, clientStore, editor, space } from "@silverbulletmd/silverbullet/syscalls";
-import { getSsssConfig } from "../config.ts";
+import { getSsssConfig } from "../../config.ts";
 
 /**
  * Theme switching!
