@@ -1,5 +1,5 @@
 (() => {
-  // src/features/vim-clipboard.ts
+  // src/features/vim-clipboard/vim-clipboard.ts
   (() => {
     const cmOf = () => {
       const v = window.client && window.client.editorView;

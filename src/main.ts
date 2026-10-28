@@ -3,7 +3,7 @@
  */
 
 import { isFeatureEnabled } from "./config.ts";
-import * as theme from "./features/theme.ts";
+import * as theme from "./features/theme/theme.ts";
 
 export async function cycleTheme() {
   if (!(await isFeatureEnabled("theme"))) return;

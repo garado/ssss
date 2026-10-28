@@ -9,9 +9,9 @@ This page makes native markdown tables resizable and editable in place. You
 can click a cell to edit it. You can also insert, move, and delete rows and
 columns from a hover menu or by dragging.
 
-The script source is in `src/features/table-editor.ts` and
-`table-resize.ts`. The command `npm run build` bundles both to `assets/*.js`
-with esbuild. The styles are in `assets/table-editor.css`. The space-lua
+The script source is in `src/features/table-editor/`. The command `npm run
+build` bundles both scripts to `assets/table-editor/` with esbuild. The styles
+are in `assets/table-editor/table-editor.css`. The space-lua
 block at the end of this page injects all three into the page. SilverBullet
 serves space files from `/.fs/`.
 
@@ -62,7 +62,7 @@ and no flag can stop it.
 -- The CSS loads the same way, rather than from a `space-style` block on
 -- this page, so that the feature flag turns off the whole feature. A
 -- `space-style` block always applies and cannot be gated.
-local ASSETS = "/.fs/Library/garado/ssss/assets/"
+local ASSETS = "/.fs/Library/garado/ssss/assets/table-editor/"
 
 local function inject(id, build)
   local doc = js.window.document

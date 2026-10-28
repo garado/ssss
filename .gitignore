@@ -1,5 +1,6 @@
-node_modules/
 ssss.plug.js
 ssss.plug.js.map
-assets/table-editor.js
-assets/table-resize.js
+node_modules/
+assets/table-editor/table-editor.js
+assets/table-editor/table-resize.js
+assets/vim-clipboard/vim-clipboard.js

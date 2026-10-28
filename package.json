@@ -5,8 +5,10 @@
   "scripts": {
     "build": "npm run build:plug && npm run build:browser",
     "build:plug": "npx plug-compile ssss.plug.yaml",
-    "build:browser": "esbuild src/features/table-editor.ts src/features/table-resize.ts src/features/vim-clipboard.ts --bundle --format=iife --target=es2020 --outdir=assets",
-    "typecheck": "tsc --noEmit --lib es2020,dom --target es2020 src/features/sb-client.d.ts src/features/table-editor.ts src/features/table-resize.ts src/features/vim-clipboard.ts"
+    "build:browser": "npm run build:table-editor && npm run build:vim-clipboard",
+    "build:table-editor": "esbuild src/features/table-editor/*.ts --bundle --format=iife --target=es2020 --outdir=assets/table-editor",
+    "build:vim-clipboard": "esbuild src/features/vim-clipboard/*.ts --bundle --format=iife --target=es2020 --outdir=assets/vim-clipboard",
+    "typecheck": "tsc --noEmit --lib es2020,dom --target es2020 src/sb-client.d.ts src/features/table-editor/*.ts src/features/vim-clipboard/*.ts"
   },
   "dependencies": {
     "@silverbulletmd/silverbullet": ">=2.12.0"

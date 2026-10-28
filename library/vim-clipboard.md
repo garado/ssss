@@ -9,7 +9,7 @@ Set `ssss.features.vimClipboard` to false to turn the feature off.
 ```space-lua
 -- inject the built asset into the real page
 
-local ASSETS = "/.fs/Library/garado/ssss/assets/"
+local ASSETS = "/.fs/Library/garado/ssss/assets/vim-clipboard/"
 
 local features = config.get("ssss", {}).features
 if type(features) ~= "table" or features.vimClipboard ~= false then
