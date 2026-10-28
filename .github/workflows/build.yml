@@ -1,0 +1,48 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # @silverbulletmd/silverbullet requires node >=24.13.0
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run typecheck
+
+      - run: npm run build
+
+      - name: verify build outputs
+        run: |
+          for f in \
+            ssss.plug.js \
+            assets/table-editor/table-editor.js \
+            assets/table-editor/table-resize.js \
+            assets/vim-clipboard/vim-clipboard.js
+          do
+            test -s "$f" || { echo "missing or empty: $f" >&2; exit 1; }
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ssss-build
+          path: |
+            ssss.plug.js
+            assets/table-editor/*.js
+            assets/vim-clipboard/*.js
+          if-no-files-found: error
